@@ -1,0 +1,11 @@
+#N canvas 441 138 582 474 10;
+#X obj 273 174 soundfiler;
+#X floatatom 279 207 5 0 0 0 - - -;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array lala 83559 float 2;
+#X coords 0 1 83559 -1 200 140 1;
+#X restore 26 310 graph;
+#X msg 210 140 read -resize ./audiofiles/celloSampleStereo.wav lala
+;
+#X connect 0 0 1 0;
+#X connect 3 0 0 0;

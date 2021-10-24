@@ -1,0 +1,37 @@
+#N canvas 105 32 1035 466 10;
+#X obj 79 277 tabwrite~ waveform;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array waveform 44 float 5;
+#A 0 0.773313 0.927272 0.168749 -0.736494 -0.964047 -0.239955 0.779796
+0.84693 -0.335701 -0.970026 0.262812 0.924764 -0.562084 -0.654571 0.907934
+0.164049 -0.998415 0.198941 0.970211 -0.172967 -0.999814 -0.322185
+0.73699 0.945482 0.217889 -0.701837 -0.976424 -0.29254 0.741507 0.879427
+-0.268535 -0.985752 0.18275 0.954296 -0.485144 -0.721465 0.865323 0.253064
+-0.999471 0.11649 0.986138 -0.101563 -0.996437 -0.378741;
+#X coords 0 1 43 -1 200 140 1;
+#X restore 225 181 graph;
+#X obj 55 239 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 457 135 spectrogram~;
+#X obj 88 255 s~ audioOut;
+#X obj 457 112 r~ audioOut;
+#X obj 78 222 osc~;
+#X obj 78 201 +~;
+#X floatatom 93 181 5 0 0 0 - - -;
+#X obj 62 159 osc~;
+#X obj 62 181 *~;
+#X floatatom 93 159 5 0 0 0 - - -;
+#X floatatom 62 139 5 0 0 0 - - -;
+#X text 128 181 carrier freq;
+#X text 128 158 modulation index;
+#X text 96 138 modulation freq;
+#X connect 2 0 0 0;
+#X connect 5 0 3 0;
+#X connect 6 0 4 0;
+#X connect 6 0 0 0;
+#X connect 7 0 6 0;
+#X connect 8 0 7 1;
+#X connect 9 0 10 0;
+#X connect 10 0 7 0;
+#X connect 11 0 10 1;
+#X connect 12 0 9 0;
