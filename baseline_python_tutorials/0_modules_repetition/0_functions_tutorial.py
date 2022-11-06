@@ -8,7 +8,7 @@ thisdict =	{
   'brand': 'Ford',
   'model': 'Mustang',
   'year': 1964,
-  'descriptions': ['awsome', 'badass', 'neat']
+  'descriptions': ['awesome', 'badass', 'neat']
 }
 print(thisdict['model'])
 # or with dummy initialization
@@ -31,7 +31,28 @@ a_number = 3
 # print('this is mylist' + mylist + ' and this is a number: ' + str(a_number) ) # but this will create an error
 s = repr( mylist )
 print('this is mylist' + repr( mylist ) + ' and this is a number: ' + str(a_number) )
+print('this is mylist' + str( mylist ) + ' and this is a number: ' + str(a_number) )
 
+# %% 
+
+def double_this_number( x ):
+    y = 2*x
+    return y
+# end double_this_number
+
+# %% 
+
+u = double_this_number( 5 )
+
+# %% 
+
+import time
+
+def show_time():
+    print('the time: ', time.monotonic_ns())
+# end show_time
+
+show_time()
 
 # %%
 
@@ -55,6 +76,31 @@ def fail_to_change_value_of_x():
 print('x value before function has been called: ' + str(x))
 # the function is called here
 fail_to_change_value_of_x()
+print('x value after function has been called: ' + str(x))
+
+# %%
+
+# for nice tutorials on functions:
+# https://www.w3schools.com/python/python_functions.asp
+
+# some basic parts that concern our course
+# global variables
+x = 'I am x'
+s = [1, 2, 3]
+
+# define function that returns nothing - has no arguments
+# the function is simply defined here - it is NOT called
+def fail_to_change_value_of_x():
+    x = 4 # intent to distinguish nested parts
+    print( 'x value inside function: ' + str(x) )
+    return x
+    # CAUTION: global variables are not affected
+    # each function has its own scope - irrelevant of global
+# function ends here - this comment is not necessary
+
+print('x value before function has been called: ' + str(x))
+# the function is called here
+y = fail_to_change_value_of_x()
 print('x value after function has been called: ' + str(x))
 
 # %%
