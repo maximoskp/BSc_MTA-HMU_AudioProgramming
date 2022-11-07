@@ -14,12 +14,12 @@ import matplotlib.pyplot as plt
 
 filename = 'audio_files/celloSampleStereo.wav'
 
-y, sr = librosa.load(filename)
+y, sr = librosa.load(filename, sr=44100)
 
 # to following function already applies a hanning window to the grain
 # create a new function or expand this function by adding an argument
 # describing the window type, if you want a different envolope
-p = au.get_stereo_random_part( y , s=0 , e=22050 , d_min=1000 , d_max=2000 , pan=0.9 )
+p = au.get_stereo_random_part( y , s=0 , e=44100 , d_min=1000 , d_max=2000 , pan=0.9 )
 # here you could apply speed/pitch change on the isolated grain or
 # you could create a new function, expanding get_stereo_random_part
 # to include an argument that describes speed/pitch alteration
