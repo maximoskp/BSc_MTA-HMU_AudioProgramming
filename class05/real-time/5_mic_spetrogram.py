@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from time import sleep
 from threading import Thread
 
-WINDOW_SIZE = 2048
+WINDOW_SIZE = 4096
 CHANNELS = 1
 RATE = 44100
 
@@ -38,10 +38,13 @@ def callback( in_data, frame_count, time_info, status):
     global global_block, f, fft_frame, win, spec_img
     # global_block = f.readframes(WINDOW_SIZE)
     n = np.frombuffer( in_data , dtype='int16' )
+    global_block = n
     # begin with a zero buffer
     b = np.zeros( (n.size , CHANNELS) , dtype='int16' )
     # 0 is left, 1 is right speaker / channel
     b[:,0] = n
+    # pitch up - octave
+    # b[:,0] = np.r_[n[::2],n[::2]]
     # for plotting
     # audio_data = np.fromstring(in_data, dtype=np.float32)
     if len(win) == len(n):
@@ -70,7 +73,7 @@ device_out_idx = 0
 # show devices
 for i in range(p.get_device_count()):
     device_info = p.get_device_info_by_index(i)
-    # print(device_info)
+    print(device_info)
     if 'Microphone' in device_info['name']:
         print('input device: ')
         print(device_info)

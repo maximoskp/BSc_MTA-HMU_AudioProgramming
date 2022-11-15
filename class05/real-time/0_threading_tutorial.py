@@ -54,6 +54,7 @@ print('text typed: ' + k)
 user_input_provided = False
 
 def user_input_thread():
+    # print('lala')
     k = input('type something and press enter: ')
     print('text typed:' + k)
     global user_input_provided
@@ -61,7 +62,14 @@ def user_input_thread():
 
 t = Thread( target = user_input_thread )
 user_keyboard_input = t.start()
-print('this does print while user input is pending')
+
+'''
+i = 0
+while i < 10:
+    print('this does print while user input is pending')
+    i += 1
+'''
+
 
 while not user_input_provided:
-    sleep(0.1)
+    sleep(0.5)

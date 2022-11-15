@@ -26,7 +26,9 @@ print( 'x: ' + str(x) + ' - y: ' + str(y) )
 
 x = 10
 y = x # can be considered as deep copy
+print('before y += 1: id(x): ' + str(id(x)) + ' - id(y): ' + str(id(y)))
 y += 1
+print('after  y += 1: id(x): ' + str(id(x)) + ' - id(y): ' + str(id(y)))
 print( 'x: ' + str(x) + ' - y: ' + str(y) )
 
 # %%
@@ -57,6 +59,7 @@ print( 'x: ' + repr(x) + ' - y: ' + repr(y) )
 
 x = [1,2,3]
 y = copy.deepcopy( x ) # deep copy and...
+print('after deep copy: id(x): ' + str(id(x)) + ' - id(y): ' + str(id(y)))
 y[0] = 4
 y[1] = 5
 y[2] = 6 # new addresses have been created
@@ -94,9 +97,44 @@ print( 'x: ' + str(x) + ' - y: ' + str(y) )
 # %% Exercises
 '''
 1) Create a function that does deep copy with deepcopy.
+'''
+def change_info( s ):
+    s = copy.deepcopy(s)
+    s['name'] = 'George'
+    s['age'] = 5
+# end change_info
 
+x = {'name': 'Maria', 'age': 10}
+y = x
+
+change_info( y )
+print( 'x: ' + str(x) + ' - y: ' + str(y) )
+
+# %%
+
+
+'''   
 2) Create a function that does deep copy by creating a new object and returning it.
+'''
 
+def change_info( s ):
+    # we know that the keys are
+    # 'name'
+    # 'age'
+    s = {}
+    s['name'] = 'George'
+    s['age'] = 5
+# end change_info
+
+x = {'name': 'Maria', 'age': 10}
+y = x
+
+change_info( y )
+print( 'x: ' + str(x) + ' - y: ' + str(y) )
+
+# %%
+  
+'''
 3) Explore what happens with the id() values of elements in arrays.
 - What if all values are integer?
 - What if all values are float?
