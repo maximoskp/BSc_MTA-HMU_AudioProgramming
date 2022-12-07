@@ -4,10 +4,10 @@ using namespace std;
 int main(){
     int array_of_ints[3] = {11, 22, 33};
     cout << "access an element: " << array_of_ints[1] << endl;
-    // actual value of variable
+    // actual value of variable - this is NOT the collection of array elements, as in python...
     cout << "value of variable representing the array: " << array_of_ints << endl;
     // pointer of first element of the array
-    int *pointer_to_first = &array_of_ints[0];
+    int * pointer_to_first = &array_of_ints[0];
     cout << "value of pointer to the first element   : " << pointer_to_first << endl;
     // modify element via array index:
     array_of_ints[2] = 42;

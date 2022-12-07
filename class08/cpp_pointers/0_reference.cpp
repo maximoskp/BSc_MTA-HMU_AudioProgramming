@@ -6,8 +6,9 @@ int main(){
     cout << "value of x is: " << x << endl;
     cout << "memory address of x: " << &x << endl;
     // getting address via a pointer
-    int *pointer_to_x = &x;
+    int *pointer_to_x = &x; // &x: διεύθυνση x | *y: περιεχόμενο y
     cout << "pointer to x: " << pointer_to_x << endl;
+    cout << "*pointer to x: " << *pointer_to_x << endl;
     cout << "------------------------------------" << endl;
     // pointers to other types
     double d = 3.14;
