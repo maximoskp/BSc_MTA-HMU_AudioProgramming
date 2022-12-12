@@ -68,37 +68,19 @@ void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRat
 void MainComponent::getNextAudioBlock (const juce::AudioSourceChannelInfo& bufferToFill)
 {
     // Your audio-processing code goes here!
-    
-    // For more details, see the help for AudioProcessor::getNextAudioBlock()
-    delay_samples_target = (int)floorf(delay_time*(float)sample_rate);
-    auto* inReadBuffer = bufferToFill.buffer->getReadPointer(0, bufferToFill.startSample);
-    auto* leftWriteBuffer  = bufferToFill.buffer->getWritePointer (0, bufferToFill.startSample);
-    auto* rightWriteBuffer = bufferToFill.buffer->getWritePointer (1, bufferToFill.startSample);
+    delay_samples = (int)floorf(delay_time*(float)sample_rate);
+    auto* micBuffer = bufferToFill.buffer->getReadPointer(0, bufferToFill.startSample);
+    auto* leftSpeakerBuffer  = bufferToFill.buffer->getWritePointer (0, bufferToFill.startSample);
+    auto* rightSpeakerBuffer = bufferToFill.buffer->getWritePointer (1, bufferToFill.startSample);
     for (auto i = 0; i < bufferToFill.numSamples; i++){
         // write to circular buffer
-        read_pointer = write_pointer - delay_samples_current < 0 ? max_delay_samples + write_pointer - delay_samples_current : write_pointer - delay_samples_current ;
-        circular_buffer[ write_pointer ] = inReadBuffer[i] + feedback*circular_buffer[ read_pointer ];
+        read_pointer = write_pointer - delay_samples < 0 ? max_delay_samples + write_pointer - delay_samples : write_pointer - delay_samples ;
+        circular_buffer[ write_pointer ] = micBuffer[i] + feedback*circular_buffer[ read_pointer ];
         write_pointer++;
         write_pointer = write_pointer%max_delay_samples;
-        leftWriteBuffer[i]  = dry*inReadBuffer[i] + wet*circular_buffer[ read_pointer ];
-        rightWriteBuffer[i] = dry*inReadBuffer[i] + wet*circular_buffer[ read_pointer ];
-        if(float_delay_samples_current < (float)delay_samples_target){
-            float_delay_samples_current = float_delay_samples_current + 1.0;
-            delay_samples_current = (int)float_delay_samples_current;
-        }else if(float_delay_samples_current > (float)delay_samples_target){
-            float_delay_samples_current = float_delay_samples_current - 1.0;
-            delay_samples_current = (int)float_delay_samples_current;
-        }
+        leftSpeakerBuffer[i]  = dry*micBuffer[i] + wet*circular_buffer[ read_pointer ];
+        rightSpeakerBuffer[i] = dry*micBuffer[i] + wet*circular_buffer[ read_pointer ];
     }
-    /*DBG("==============================");
-    DBG("float_delay_samples_current: " + juce::String(float_delay_samples_current));
-    DBG("delay_samples_current: " + juce::String(delay_samples_current));
-    DBG("delay_samples_target: " + juce::String(delay_samples_target));*/
-    /*DBG("write_pointer: "+juce::String(write_pointer));
-    DBG("read_pointer: "+juce::String(read_pointer));*/
-    // Right now we are not producing any data, in which case we need to clear the buffer
-    // (to prevent the output of random noise)
-//     bufferToFill.clearActiveBufferRegion();
 }
 
 void MainComponent::releaseResources()

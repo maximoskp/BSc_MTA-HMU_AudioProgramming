@@ -31,9 +31,7 @@ private:
     int read_pointer = 0;
     int write_pointer = 0;
     float delay_time = .25;
-    int delay_samples_target = 2*44100;
-    int delay_samples_current = 2*44100;
-    float float_delay_samples_current = 2. * 44100.;
+    int delay_samples;
     int sample_rate = 0;
     float feedback = 0.5;
     float dry = 0.0;
