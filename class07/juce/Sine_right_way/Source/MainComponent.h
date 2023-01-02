@@ -37,7 +37,7 @@ private:
     float sample_rate = 0.0;
     // unsigned int total_samples = 0; // we don't count samples any more
     float current_angle = 0.0; // we count angle difference!
-    float time_fraction = 0.0;
+    // float time_fraction = 0.0;
 
     // UI
     juce::Slider amp_slider;
