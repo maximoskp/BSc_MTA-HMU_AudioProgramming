@@ -1,0 +1,11 @@
+class01
+General stuff, a bit of audacity and basic python.
+
+class02
+Basic python, numpy and building a sinusoid in numpy.
+
+class03
+Dictionaries, functions pt1 (no *args or **kwargs), shallow and deep copy and making sound generators with functions.
+
+class04
+TODO: for, while, if, measure how slow is for. Functions pt2 (*args **kwargs). Classes and inheritance. Github tools etc. Modules/packages.
